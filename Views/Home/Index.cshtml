@@ -1,0 +1,105 @@
+﻿@{
+    ViewData["Title"] = "Home";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home - FazendaUrbana</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <style>
+        /* Add your additional styles here */
+        body {
+            background-color: #f8f9fa; /* Light background */
+        }
+        .hero {
+            position: relative;
+            background: url('~/Home/plantmain.jpg') no-repeat center center; 
+            background-size: cover;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        .plant-bg {
+            position: absolute;
+            bottom: 0; 
+            left: 50%; 
+            transform: translateX(-50%); 
+            width: 100%; 
+            opacity: 0.1; 
+            pointer-events: none; 
+        }
+        .welcome-box {
+            background-color: rgba(144, 238, 144, 0.8); 
+            padding: 20px;
+            border-radius: 3px; 
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            position: relative; 
+            z-index: 1; 
+        }
+        .intro {
+            padding: 20px;
+        }
+        .btn-learn-more {
+            margin-top: 20px;
+        }
+        button,
+        .btn {
+            font-family: 'Open Sans', sans-serif; /* Apply Open Sans font to buttons */
+        }
+        .btn {
+            font-size: 16px; /* Change font size as needed */
+            padding: 10px 20px; /* Adjust padding */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        
+        <div class="hero">
+            @* <img src="FazendaUrbana/Views/Home/plantmain.jpg" alt="Plant Background" class="plant-bg" /> <!-- Replace with actual plant image path --> *@
+            <div class="container">
+                <div class="welcome-box">
+                    <p style="margin: 0;">Bem Vindo a</p>
+                    <h1 style="margin: 0;">Growasis</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<section id="about" class="text-center">
+    <h2>Sobre a Growasis</h2>
+    <p>A Growasis é uma startup inovadora focada em resolver desafios
+    urbanos relacionados ... </p>
+    <a class="btn btn-outline-dark me-2" role="button" asp-controller="Home" asp-action="AboutUs">Mais</a>
+</section>
+
+<section id="products" class="text-center">
+    @model IEnumerable<FazendaUrbana.Models.ProdutoModel>
+
+    <h2>alguns dos nossos produtos</h2>
+    <div class="product-grid">
+        @foreach (var product in Model) // Iterate over the products
+        {
+        <div class="product">
+            <h3>@Html.DisplayFor(m => product.Nome)</h3> <!-- Product Name -->
+            <p>Preço: $@Html.DisplayFor(m => product.Preco)</p> <!-- Product Price -->
+            <a class="btn btn-outline-dark me-2" asp-area="" asp-controller="ShoppingCart" asp-action="Index">Comprar</a>
+        </div>
+        }
+    <a href="Produto/Cindex" class="btn">ver todos os itens</a>
+</section>
+    </header>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+</body>
+</html>

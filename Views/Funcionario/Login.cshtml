@@ -1,0 +1,63 @@
+@{
+    ViewData["Title"] = "Login";
+}
+
+<style>
+    .login-form-container {
+        max-width: 400px; /* Set a maximum width for the form */
+        margin: 50px auto; /* Center the form on the page */
+        padding: 20px;
+        border: 1px solid #ccc; /* Light border around the form */
+        border-radius: 8px; /* Rounded corners */
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        background-color: #ffffff; /* White background */
+    }
+
+    .login-form-container h2 {
+        text-align: center; /* Center the title */
+        color: #004d00; /* Dark green color for the title */
+    }
+
+    .form-group {
+        margin-bottom: 15px; /* Spacing between form rows */
+    }
+
+    .form-group label {
+        font-weight: bold; /* Bold labels */
+    }
+
+    .form-group input {
+        width: 100%; /* Full width inputs */
+        padding: 10px; /* Padding inside the inputs */
+        border: 1px solid #ccc; /* Light border for inputs */
+        border-radius: 4px; /* Rounded corners for inputs */
+    }
+
+    .btn-login {
+        width: 100%; /* Full width button */
+        background-color: #004d00; /* Green background for button */
+        color: white; /* White text for button */
+        border: none; /* No border */
+        padding: 10px; /* Padding */
+        border-radius: 4px; /* Rounded corners */
+    }
+
+    .btn-login:hover {
+        background-color: #003700; /* Darker green on hover */
+    }
+</style>
+
+<div class="login-form-container">
+    <h2>Login</h2>
+    <form asp-action="Login" method="post">
+        <div class="form-group">
+            <label for="CPF">CPF</label>
+            <input type="text" id="CPF" name="CPF" required />
+        </div>
+        <div class="form-group">
+            <label for="senha">Senha</label>
+            <input type="password" id="senha" name="senha" required />
+        </div>
+        <button type="submit" class="btn-login">Login</button>
+    </form>
+</div>

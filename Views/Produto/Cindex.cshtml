@@ -1,0 +1,66 @@
+@model IEnumerable<FazendaUrbana.Models.ProdutoModel>
+
+<div class="container mt-5">
+    <h1 class="mb-4 text-center">Produtos Disponíveis</h1>
+    <div class="row">
+        @if (!Model.Any())
+        {
+            <div class="col text-center">
+                <p>Nenhum produto encontrado.</p>
+            </div>
+        }
+        else
+        {
+            for (var i = 0; i < Model.Count(); i += 2)
+            {
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">@Html.DisplayFor(model => Model.ElementAt(i).Nome)</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">Preço: @Html.DisplayFor(model => Model.ElementAt(i).Preco)</h6>
+                                <p class="card-text">@Html.DisplayFor(model => Model.ElementAt(i).Descricao)</p>
+                                <a asp-action="Cdetails" asp-route-id="@Model.ElementAt(i).Id" class="btn btn-info">Detalhes</a>
+                            </div>
+                        </div>
+                    </div>
+                    @if (i + 1 < Model.Count())
+                    {
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">@Html.DisplayFor(model => Model.ElementAt(i + 1).Nome)</h5>
+                                    <h6 class="card-subtitle mb-2 text-muted">Preço: @Html.DisplayFor(model => Model.ElementAt(i + 1).Preco)</h6>
+                                    <p class="card-text">@Html.DisplayFor(model => Model.ElementAt(i + 1).Descricao)</p>
+                                    <a asp-action="Cdetails" asp-route-id="@Model.ElementAt(i + 1).Id" class="btn btn-info">Detalhes</a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+        }
+    </div>
+</div>
+
+<!-- Optional: Include Bootstrap CSS if not already included -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<style>
+    .card {
+        border-radius: 10px; /* Rounded corners */
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for cards */
+    }
+    .btn-info {
+        background-color: #007bff; /* Bootstrap primary color */
+        border-color: #007bff; /* Button border color */
+    }
+    .btn-info:hover {
+        background-color: #0056b3; /* Hover color */
+    }
+    .container {
+        padding: 20px; /* Add some padding around the container */
+        background-color: #f8f9fa; /* Light gray background for the container */
+        border-radius: 10px; /* Rounded corners */
+    }
+</style>

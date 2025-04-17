@@ -1,0 +1,58 @@
+@model FazendaUrbana.Models.Pedido
+
+
+<h2>criar pedido</h2>
+
+<form asp-action="Create" method="post">
+    <div class="form-group">
+        <label asp-for="Endereco" class="control-label"></label>
+        <input asp-for="Endereco" class="form-control" />
+        <span asp-validation-for="Endereco" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ClienteId" class="control-label"></label>
+        <select asp-for="ClienteId" class="form-control" asp-items="@(new SelectList(ViewBag.Clientes, "Id", "Nome"))">
+            <option value="">-- Select a Client --</option>
+        </select>
+        <span asp-validation-for="ClienteId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="TransportadoraId" class="control-label"></label>
+        <select asp-for="TransportadoraId" class="form-control" asp-items="@(new SelectList(ViewBag.Transportadora, "Id", "Nome"))">
+            <option value="">-- Select a Carrier --</option>
+        </select>
+        <span asp-validation-for="TransportadoraId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Status" class="control-label"></label>
+        <input asp-for="Status" class="form-control" />
+        <span asp-validation-for="Status" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="MetodoEntrega" class="control-label"></label>
+        <input asp-for="MetodoEntrega" class="form-control" />
+        <span asp-validation-for="MetodoEntrega" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Create</button>
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+</form>
+
+@section Scripts {
+    @{
+        var culture = System.Threading.Thread.CurrentThread.CurrentCulture.Name;
+    }
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    <script>
+        $(function () {
+            $('form').submit(function () {
+                // You can perform additional client-side validation here if needed
+            });
+        });
+    </script>
+}

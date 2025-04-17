@@ -1,0 +1,29 @@
+@model IEnumerable<FazendaUrbana.Models.ClienteModel>
+
+<h2>Clientes</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Telefone</th>
+            <th>Email</th>
+            <th>Endereco</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var cliente in Model)
+        {
+            <tr>
+                <td>@cliente.Nome</td>
+                <td>@cliente.Telefone</td>
+                <td>@cliente.Email</td>
+                <td>@cliente.Endereco</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<button class="btn" onclick="location.href='@Url.Action("Signup", "Cliente")';">sign up</button>
+<form asp-action="Logout" method="post">
+    @Html.AntiForgeryToken()
+    <button type="submit">Logout</button>
+</form>

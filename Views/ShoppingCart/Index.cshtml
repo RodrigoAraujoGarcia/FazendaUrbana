@@ -1,0 +1,140 @@
+@model FazendaUrbana.Models.ShoppingCartViewModel
+
+<style>
+    .navbar {
+            background-color: #004d00; /* white green background */
+        }
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f9fafb;
+        color: #333;
+    }
+    h2 {
+        color: #007b33; /* Dark green for headers */
+        text-align: center;
+    }
+    table {
+        width: 80%;
+        margin: 20px auto;
+        border-collapse: collapse;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    th, td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #dddddd;
+    }
+    th {
+        background-color: #c6e3e0; /* Light green for table header */
+    }
+    tr:hover {
+        background-color: #eaeff3; /* Light grey on hover */
+    }
+    a {
+        color: #007b33; /* Green for links */
+        text-decoration: none;
+        font-weight: bold;
+    }
+    a:hover {
+        text-decoration: underline; /* Underline on hover for links */
+    }
+    .total {
+        text-align: center; /* Center the text */
+        margin: 20px auto; /* Automatic margins on left and right for centering */
+        font-size: 18px;
+        font-weight: bold;
+        color: #007b33;
+    }
+    .form-container {
+        text-align: center;
+        margin: 20px;
+    }
+    .form-container label {
+        margin-right: 10px;
+    }
+    .form-container input {
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+    }
+    .form-container button {
+        background-color: #007b33;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        margin-left: 10px;
+        cursor: pointer;
+        border-radius: 4px;
+    }
+    .form-container button:hover {
+        background-color: #005d2f; /* Darker green on hover */
+    }
+    .empty-cart {
+        text-align: center;
+        margin: 20px;
+    }
+    .product-list {
+        margin-top: 40px;
+    }
+</style>
+
+<h2>Meu Carrinho</h2>
+
+@if (Model.Cart.Items.Any())
+{
+    <table>
+        <tr>
+            <th>Nome</th>
+            <th>Preço</th>
+            <th>Quantidade</th>
+            <th>Ações</th>
+        </tr>
+        @foreach (var item in Model.Cart.Items)
+        {
+            <tr>
+                <td>@item.Nome</td>
+                <td>@item.Preco.ToString("C")</td>
+                <td>@item.Quantidade</td>
+                <td>
+                    <a asp-action="RemoveFromCart" asp-route-id="@item.ProdutoId">Remover</a>
+                </td>
+            </tr>
+        }
+    </table>
+    <div class="total">Total: @Model.Cart.Total.ToString("C")</div>
+    
+    <div class="form-container">
+        <form asp-action="FinalizePurchase" method="post">
+            <label for="endereco">Endereço de Entrega:</label>
+            <input type="text" id="endereco" name="endereco" required />
+            <button type="submit">Finalizar Compra</button>
+        </form>
+    </div>
+}
+else
+{
+    <div class="empty-cart">
+        <p>Seu carrinho está vazio.</p>
+        <a class="nav-link text-black" asp-area="" asp-controller="Cliente" asp-action="OrderStatus">Veja suas compras</a>
+    </div>
+}
+
+<h2 class="product-list">Lista de Produtos</h2>
+
+<table>
+    <tr>
+        <th>Nome</th>
+        <th>Preço</th>
+        <th>Ações</th>
+    </tr>
+    @foreach (var produto in Model.Produtos)
+    {
+        <tr>
+            <td>@produto.Nome</td>
+            <td>@produto.Preco.ToString("C")</td>
+            <td>
+                <a asp-action="AddToCart" asp-route-id="@produto.Id">Adicionar ao Carrinho</a>
+            </td>
+        </tr>
+    }
+</table>

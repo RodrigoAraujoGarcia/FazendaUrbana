@@ -1,0 +1,58 @@
+@model FazendaUrbana.Models.ProdutoModel
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create Product</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <style>
+        .create-product-container {
+            max-width: 600px; /* Limit the width of the container */
+            margin: 50px auto; /* Center the container */
+            padding: 20px; /* Padding for the container */
+            border: 1px solid #ccc; /* Light border for the container */
+            border-radius: 8px; /* Rounded corners */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Shadow effect */
+            background-color: #f9f9f9; /* Light background */
+        }
+        .btn-primary {
+            background-color: #004d00; /* Custom green for buttons */
+            border: none; /* No border */
+        }
+        .btn-primary:hover {
+            background-color: #003700; /* Darker green on hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="create-product-container">
+        <h1 class="text-center">Create New Product</h1>
+        <form asp-action="Create" method="post">
+            <div class="mb-3">
+                <label for="Nome" class="form-label">Nome:</label>
+                <input type="text" class="form-control" name="Nome" required />
+            </div>
+            <div class="mb-3">
+                <label for="Preco" class="form-label">Preço:</label>
+                <input asp-for="Preco" class="form-control" type="text" required />
+                <span asp-validation-for="Preco" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label for="Categoria" class="form-label">Categoria:</label>
+                <input type="text" class="form-control" name="Categoria" required />
+            </div>
+            <div class="mb-3">
+                <label for="Descricao" class="form-label">Descrição:</label>
+                <textarea name="Descricao" class="form-control" rows="4"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Create</button>
+        </form>
+        <button class="btn btn-secondary mt-3" onclick="location.href='@Url.Action("Index")';">Voltar</button>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

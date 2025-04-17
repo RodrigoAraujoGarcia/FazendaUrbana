@@ -1,0 +1,71 @@
+@model IEnumerable<FazendaUrbana.Models.FuncionarioModel>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Funcionários</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <style>
+        body {
+            background-color: #f8f9fa; /* Light background for the entire page */
+        }
+        .container {
+            margin-top: 50px; /* Space from the top */
+        }
+        .logout-btn {
+            background-color: #c12d2d; /* Red background for logout */
+            color: white; /* White text */
+        }
+        .logout-btn:hover {
+            background-color: #a72a2a; /* Darker red on hover */
+        }
+        .create-btn {
+            margin-bottom: 20px; /* Space below the create button */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">Funcionários</h1>
+        <button class="btn btn-primary create-btn" onclick="location.href='@Url.Action("Create", "Funcionario")';">Add New Funcionário</button>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nome</th>
+                    <th>CPF</th>
+                    <th>Telefone</th>
+                    <th>Cargo</th>
+                    <th>Data de Admissão</th>
+                    <th>Carga Horária</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var funcionario in Model)
+                {
+                    <tr>
+                        <td>@funcionario.Id</td>
+                        <td>@funcionario.Nome</td>
+                        <td>@funcionario.CPF</td>
+                        <td>@funcionario.Telefone</td>
+                        <td>@funcionario.Cargo</td>
+                        <td>@funcionario.DataDeAdmissao.ToShortDateString()</td>
+                        <td>@funcionario.CargaHoraria</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <form asp-action="Logout" method="post">
+            @Html.AntiForgeryToken()
+            <button type="submit" class="btn logout-btn">Logout</button>
+        </form>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

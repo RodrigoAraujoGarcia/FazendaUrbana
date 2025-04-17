@@ -1,0 +1,70 @@
+@model IEnumerable<FazendaUrbana.Models.OrderStatusViewModel>
+
+@{
+    ViewData["Title"] = "Order Status";
+}
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f9fafb;
+        color: #333;
+    }
+    h2 {
+        color: #007b33; /* Dark green for headers */
+        text-align: center; /* Centering the title */
+    }
+    table {
+        width: 80%;
+        margin: 20px auto; /* Centering the table */
+        border-collapse: collapse;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    th, td {
+        padding: 12px;
+        text-align: left; /* Align text to the left */
+        border-bottom: 1px solid #dddddd;
+    }
+    th {
+        background-color: #c6e3e0; /* Light green for table header */
+    }
+    tr:hover {
+        background-color: #eaeff3; /* Light grey on hover */
+    }
+    .no-orders {
+        text-align: center; /* Center the "No orders found." message */
+        margin: 20px; 
+        color: #777; /* Gray color for the message */
+    }
+</style>
+
+<h2>Your Orders</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Pedido ID</th>
+            <th>Produto Nome</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+        {
+            foreach (var order in Model)
+            {
+                <tr>
+                    <td>@order.PedidoId</td>
+                    <td>@order.ProdutoNome</td>
+                    <td>@order.Status</td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="3" class="no-orders">No orders found.</td>
+            </tr>
+        }
+    </tbody>
+</table>

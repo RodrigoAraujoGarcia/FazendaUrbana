@@ -1,0 +1,68 @@
+@{
+    ViewData["Title"] = "Employee Page";
+}
+
+<style>
+    .employee-container {
+        max-width: 600px; /* Limit the width of the container */
+        margin: 50px auto; /* Center the container */
+        padding: 20px; /* Padding for the container */
+        border: 1px solid #ccc; /* Light border for the container */
+        border-radius: 8px; /* Rounded corners */
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Shadow effect */
+        background-color: #f9f9f9; /* Light background */
+    }
+    .welcome-title {
+        color: #004d00; /* Dark green for the welcome text */
+        text-align: center; /* Center the title */
+    }
+    .employee-info {
+        margin-bottom: 20px; /* Space between info elements */
+        font-size: 18px; /* Slightly larger font size */
+        color: #333; /* Dark text color */
+    }
+    .nav-item {
+        margin: 10px 0; /* Spacing for navigation items */
+    }
+    .bnt {
+        display: inline-block; /* Better button styling */
+        padding: 10px 15px; /* Padding for buttons */
+        background-color: #e7f3e7; /* Light green background for links */
+        color: #333; /* Dark text color */
+        border-radius: 4px; /* Rounded corners */
+        text-decoration: none; /* Remove underline */
+    }
+    .btn-logout {
+        width: 100%; /* Full width button */
+        padding: 10px;
+        background-color: #c12d2d; /* Red background for logout */
+        color: white; /* White text */
+        border: none;
+        border-radius: 4px; /* Rounded corners */
+    }
+    .btn-logout:hover {
+        background-color: #a72a2a; /* Darker red on hover */
+    }
+</style>
+
+<div class="employee-container">
+    <h2 class="welcome-title">@ViewBag.UserName</h2>
+    <p class="employee-info">CPF: @Context.Session.GetString("UserCPF")</p>
+    <p class="employee-info">argo: @Context.Session.GetString("UserCargo")</p>
+
+    <div>
+        <li class="nav-item">
+            <a class="bnt" asp-area="" asp-controller="Produto" asp-action="Index">Produtos</a>
+        </li>
+        <li class="nav-item">
+            <a class="bnt" asp-area="" asp-controller="Funcionario" asp-action="Index">Funcionarios</a>
+        </li>
+    </div>
+
+    <!-- Add more employee-specific information here -->
+
+    <form asp-action="Logout" method="post">
+        @Html.AntiForgeryToken()
+        <button type="submit" class="btn-logout">Logout</button>
+    </form>
+</div>

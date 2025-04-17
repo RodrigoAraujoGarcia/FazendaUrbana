@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - FazendaUrbana</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/FazendaUrbana.styles.css" asp-append-version="true" />
+    <style>
+        /* Custom styles for the navbar */
+        .navbar {
+            background-color: #004d00; /* dark green background */
+            z-index: 1000; /* ensure the navbar is above other content */
+        }
+        .navbar-brand,
+        .navbar-nav .nav-link {
+            color: #ffffff; /* White text for better contrast */
+        }
+        .navbar-nav .nav-link:hover {
+            color: #d9f9d9; /* Light green on hover */
+        }
+        body {
+            margin-top: 56px; /* Added margin to offset the navbar height */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-light border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand text-white" asp-area="" asp-controller="Home" asp-action="Index">FazendaUrbana</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse">
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-area="" asp-controller="Produto" asp-action="Cindex">Produto</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="AboutUs">Sobre Nós</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-area="" asp-controller="ShoppingCart" asp-action="Index">Pedido</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="TalkToUs">Fale Conosco</a>
+                        </li>
+                    </ul>
+                    <!-- Buttons on the far right side -->
+                    @if (Context.Session.GetString("UserId") != null) // Use Context.Session instead of HttpContext.Session
+                    {
+                        <form asp-controller="Cliente" asp-action="Logout" method="post" class="d-inline">
+                            <button type="submit" class="btn btn-outline-light me-2">Log Out</button>
+                        </form>
+                    }
+                    else 
+                    {
+                        <a class="btn btn-outline-light me-2" role="button" asp-controller="Cliente" asp-action="Login">Log In</a>
+                        <a class="btn btn-outline-light me-2" role="button" asp-controller="Cliente" asp-action="Signup">Sign Up</a>
+                    }
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container d-flex justify-content-between align-items-center">
+            <div class="left-footer">
+                © 2024 - FazendaUrbana - 
+                <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            </div>
+            <a asp-area="" asp-controller="Funcionario" asp-action="Login" class="right-footer">Para Funcionario</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
